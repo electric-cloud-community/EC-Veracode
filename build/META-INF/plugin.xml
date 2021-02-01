@@ -1,0 +1,13 @@
+<plugin>
+  <key>EC-Veracode</key>
+  <label>EC-Veracode</label>
+  <author>Shozab Naqvi</author>
+  <category>Code Analysis</category>
+  <description>Veracode Integration</description>
+  <configure>ec_config</configure>
+  <version>1.0.0.0</version>
+  <authorUrl>none</authorUrl>
+  <help>help.xml</help>
+  <depends min='1.4.1'>EC-PluginManager</depends>
+  <commander-version min='6.0' />
+</plugin>

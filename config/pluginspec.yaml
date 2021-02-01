@@ -1,0 +1,51 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call pdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'EC-Veracode'
+  version: '1.0.0'
+  description: 'Veracode Integration'
+  author: 'Shozab Naqvi'
+  supportUrl: 'none'
+  category: 'Code Analysis'
+  shell: 'ec-perl'
+
+# REST-backed plugin configuration
+configuration:
+  checkConnection: true
+  restConfigInfo:
+    endpointLabel: 'My REST Endpoint'
+    checkConnectionUri: '/healthcheck/status'
+    headers:
+      Accept: 'application/json'
+    authSchemes:
+      basic:
+        userNameLabel: 'Username'
+        passwordLabel: 'Password'
+        description: 'Username and password to connect to ...'
+  hasProxySupport: true
+  hasDebugLevel: true
+
+procedures:
+-
+  name: 'Get Summary Report'
+  description: 'This procedure Summary Report of a static analysis, dynamic analysis or manual penetration test.'
+  hasConfig: true
+  shell: 'ec-perl'
+  parameters:
+  -
+    name: app_guid
+    documentation: 'GUID of the application.'
+    required: true
+    type: entry
+    label: App ID
+    restParamInfo:
+      in: path
+  outputParameters:
+    - name: report
+      isRestOutputParam: true
+  # Connects REST endpoint to the plugin procedure
+  restProcedureInfo:
+    url: appsec/v2/applications/{{app_guid}}/summary_report
+    methodName: 'getDetailedReport'
+    httpMethod: 'GET'
